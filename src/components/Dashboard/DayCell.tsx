@@ -11,7 +11,7 @@ export default function DayCell({
 }: DayCellProps) {
 	return (
 		<div
-			className={`flex-1 font-bold text-snow-white flex flex-col p-3 items-center justify-center rounded-md ${
+			className={`flex-1 font-bold text-snow-white flex flex-col p-3 items-center justify-center rounded-3xl ${
 				isToday ? "current-day" : "bg-accent/30"
 			}  hover:shadow-lg hover:shadow-accent hover:cursor-pointer duration-300 ease-in-out h-full drop-shadow-md shadow-black select-none box-border`}
 		>

@@ -1,37 +1,8 @@
 import { NavLink } from "react-router";
 import useLocalStorage from "use-local-storage";
-enum Muscle {
-	BICEPS,
-	TRICEPS,
-	CHEST,
-	SHOUDLERS,
-	BACK,
-	QUADRACEPS,
-	HAMSTRINGS,
-	CALVES,
-	ABDOMINALS,
-}
-
-interface Exercise {
-	name: String;
-	reps: Number;
-	sets: Number;
-	musclesWorked: Muscle[];
-}
-
-interface Workout {
-	name: String;
-	exercises: Exercise[];
-	intensity: Number;
-}
-
+import {WorkoutInterface} from "../util/interfaces"
 export default function Workout() {
-	// const testWorkout: Workout = {
-	// 	name: "Push Day",
-	// 	exercises: [],
-	// 	intensity: 8,
-	// };
-	const [workouts, setWorkouts] = useLocalStorage<Workout[]>("workouts", []);
+	const [workouts, setWorkouts] = useLocalStorage<WorkoutInterface[]>("workouts", []);
 	return workouts.length > 0 ? (
 		<>
 			{workouts[0].name}

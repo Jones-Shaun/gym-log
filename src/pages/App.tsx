@@ -7,11 +7,9 @@ import History from "./History.js";
 import CreateWorkout from "../components/Workout/CreateWorkout.js";
 import Dashboard from "./Dashboard.js";
 
-const quote = require("inspirational-quotes");
-
 function App() {
 	return (
-		<div className="App bg-snow-white flex">
+		<div className="App bg-snow-white-dark flex">
 			<Sidebar />
 			{/* Main Board */}
 			<div className="h-full w-full p-5 opacity-100 flex flex-col justify-center text-black">
@@ -23,10 +21,6 @@ function App() {
 					<Route path="history" element={<History />} />
 					<Route path="database" element={<Database />} />
 				</Routes>
-
-				<span className="mt-auto text-center text-primary hover-css font-thin text-lg">
-					{(quote.getRandomQuote() as string).toLowerCase()}
-				</span>
 			</div>
 		</div>
 	);
