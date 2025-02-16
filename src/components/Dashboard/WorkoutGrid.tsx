@@ -5,7 +5,9 @@ import { testWorkouts } from "../../SampleWorkouts";
 import { aggregateMuscles } from "../../util/util";
 
 interface WorkoutGridProps {
-	setChosenWorkout: React.Dispatch<React.SetStateAction<WorkoutInterface | undefined>>;
+	setChosenWorkout: React.Dispatch<
+		React.SetStateAction<WorkoutInterface | undefined>
+	>;
 }
 
 export default function WorkoutGrid({ setChosenWorkout }: WorkoutGridProps) {
@@ -45,7 +47,10 @@ export default function WorkoutGrid({ setChosenWorkout }: WorkoutGridProps) {
 		});
 	};
 
-	const [workouts, setWorkouts] = useLocalStorage<WorkoutInterface[]>("workouts", []);
+	const [workouts, setWorkouts] = useLocalStorage<WorkoutInterface[]>(
+		"workouts",
+		[]
+	);
 
 	useEffect(() => {
 		setWorkouts(testWorkouts);
@@ -53,9 +58,11 @@ export default function WorkoutGrid({ setChosenWorkout }: WorkoutGridProps) {
 
 	return (
 		<div className="h-full w-full bg-snow-white p-10 shadow-lg rounded-lg flex flex-col gap-10 text-text min-h-0">
-			<span className="text-3xl font-bold text-primary">choose a workout for today,</span>
+			<span className="text-3xl font-bold text-primary">
+				choose a workout for today,
+			</span>
 			<div
-				className="min-h-0 h-full w-full grid grid-rows-[repeat(auto-fill,_minmax(140px,1fr))] grid-cols-[repeat(auto-fill,_minmax(340px,1fr))] gap-8 overflow-y-auto p-4"
+				className="min-h-0 h-full w-full grid grid-rows-[repeat(auto-fill,_minmax(140px,1fr))] grid-cols-[repeat(auto-fill,_minmax(330px,1fr))] gap-8 overflow-y-auto p-4"
 				style={{ scrollbarGutter: "stable both-edges" }}
 			>
 				{renderWorkouts(workouts)}

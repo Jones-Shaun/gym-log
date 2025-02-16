@@ -1,24 +1,27 @@
 export enum Muscle {
-  BICEPS = "BICEPS",
-  TRICEPS = "TRICEPS",
-  CHEST = "CHEST",
-  SHOULDERS = "SHOULDERS",
-  BACK = "BACK",
-  QUADRICEPS = "QUADRICEPS",
-  HAMSTRINGS = "HAMSTRINGS",
-  CALVES = "CALVES",
-  ABDOMINALS = "ABDOMINALS",
+	BICEPS = "BICEPS",
+	TRICEPS = "TRICEPS",
+	CHEST = "CHEST",
+	SHOULDERS = "SHOULDERS",
+	BACK = "BACK",
+	QUADRICEPS = "QUADRICEPS",
+	HAMSTRINGS = "HAMSTRINGS",
+	CALVES = "CALVES",
+	ABDOMINALS = "ABDOMINALS",
 }
 
 export interface Exercise {
-	name: String;
-	reps: Number;
-	sets: Number;
+	name: string;
+	reps: number;
+	sets: number;
 	musclesWorked: Muscle[];
+	instructions: string;
+	setsCompleted: number;
 }
 
 export interface WorkoutInterface {
-	name: String;
+	name: string;
 	exercises: Exercise[];
-	intensity: Number;
+	intensity: number;
+	done: boolean;
 }

@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
-import { WorkoutInterface } from "../../util/interfaces";
-import { aggregateMuscles } from "../../util/util";
-
-const quote = require("inspirational-quotes");
+import { Exercise, WorkoutInterface } from "../../util/interfaces";
+import WorkoutOverview from "./WorkoutDisplay/WorkoutOverview";
+import ExerciseList from "./WorkoutDisplay/ExerciseList";
+import { useEffect, useState } from "react";
+import ExerciseInformation from "./WorkoutDisplay/ExerciseInformation";
+import { Route, Routes } from "react-router";
 
 interface WorkoutDisplayProps {
 	workout: WorkoutInterface;
@@ -10,29 +12,53 @@ interface WorkoutDisplayProps {
 
 export default function WorkoutDisplay({ workout }: WorkoutDisplayProps) {
 	const currentDay = dayjs();
+
+	const [exercises, setExercises] = useState<Exercise[]>(workout.exercises);
+	const [chosenExercise, setChosenExercise] = useState<Exercise>(
+		workout.exercises[0]
+	);
+
+	// when chosen exercise done, move on to next
+	useEffect(() => {
+		const exerciseIndex = exercises.findIndex(
+			(e) => e.name === chosenExercise.name
+		);
+		if (
+			exerciseIndex >= 0 &&
+			exercises[exerciseIndex].setsCompleted ===
+				exercises[exerciseIndex].sets
+		) {
+			// go to next available exercise
+			for (let i = 0; i < exercises.length; i++) {
+				if (exercises[i].setsCompleted < exercises[i].sets) {
+					setChosenExercise(exercises[i]);
+				}
+			}
+		}
+	}, [exercises]);
+
 	return (
-		<div className="rounded-lg p-10 h-full flex bg-snow-white shadow-xl text-text gap-10">
-			<div className="flex flex-col gap-10 h-full">
-				<span className=" text-6xl text-primary font-bold">{currentDay.format("ddd").toUpperCase() + currentDay.format("DD")}</span>
-				<div className="flex flex-col">
-					<div className="font-bold text-2xl ">Today's Workout,</div>
-					<div className="font-bold text-6xl underline">{workout.name.toUpperCase()}</div>
-				</div>
-				<div className="flex flex-col gap-2">
-					<span className="font-bold text-2xl">
-						<span className="text-5xl font-black underline">{workout.exercises.length}</span> exercises to be done
-					</span>
-					<span className="font-bold text-2xl">
-						<span className="text-5xl font-black underline">{aggregateMuscles(workout).length}</span> muscle groups worked
-					</span>
-				</div>
-				<div className="flex flex-col gap-2">
-					<span className="font-bold text-2xl">Message of the Day</span>
-					<span className="text-lg w-[20rem]">{quote.getRandomQuote() as string}</span>
-				</div>
-			</div>
-			<div className="h-full w-[2px] bg-snow-white-dark opacity-80 rounded-xl"></div>
-			<div>other side</div>
+		<div className="rounded-lg p-10 h-full flex bg-snow-white shadow-2xl text-text">
+			<WorkoutOverview currentDay={currentDay} workout={workout} />
+			<div className="h-full w-[4px] bg-accent opacity-20 rounded-xl"></div>
+			<ExerciseList
+				exercises={exercises}
+				chosenExercise={chosenExercise}
+				setChosenExercise={setChosenExercise}
+			/>
+			<div className="h-full w-[4px] bg-accent opacity-20 rounded-xl"></div>
+			<Routes>
+				<Route
+					path=":exercise"
+					element={
+						<ExerciseInformation
+							chosenExercise={chosenExercise}
+							exercises={exercises}
+							setExercises={setExercises}
+						/>
+					}
+				/>
+			</Routes>
 		</div>
 	);
 }

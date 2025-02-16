@@ -6,7 +6,7 @@ import { WorkoutInterface } from "../util/interfaces";
 
 export default function Dashboard() {
 	const [chosenWorkout, setChosenWorkout] = useState<WorkoutInterface>();
-	
+
 	useEffect(() => {
 		console.log(chosenWorkout);
 	}, [chosenWorkout]);
@@ -14,7 +14,11 @@ export default function Dashboard() {
 	return (
 		<div className="h-full flex flex-col gap-5">
 			<NavBar />
-			{chosenWorkout !== undefined ? <WorkoutDisplay workout={chosenWorkout}/> : <WorkoutGrid setChosenWorkout={setChosenWorkout} />}
+			{chosenWorkout !== undefined ? (
+				<WorkoutDisplay workout={chosenWorkout} />
+			) : (
+				<WorkoutGrid setChosenWorkout={setChosenWorkout} />
+			)}
 		</div>
 	);
 }
