@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+	--color-snow-white: #faf9f6;
+	--color-primary: #e82561;
+	--color-accent: #c30e59;
+}
+
+@layer components {
+	.hover-css {
+		transition: all ease-in-out 300ms;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.current-day {
+		background-color: var(--color-primary);
+		border: 0.5px solid var(--color-snow-white);
+	}
+}
+
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	height: 100vh;
+	color: #faf9f6;
+}
+
+#root {
+	height: 100vh;
+}
+
+html,
+body,
+.App {
+	height: 100%;
+	overflow: hidden;
+}
