@@ -44,7 +44,7 @@ export default function WorkoutDisplay({ workout, setChosenWorkout }: WorkoutDis
 	}, [exercises]);
 
 	return (
-		<div className="rounded-lg p-10 gap-10 h-full w-full flex bg-snow-white shadow-2xl text-text">
+		<div className="rounded-lg p-10 gap-10 h-full w-full flex bg-snow-white shadow-2xl text-text overflow-y-scroll">
 			<WorkoutOverview currentDay={currentDay} workout={workout} />
 			<div className="h-full w-[4px] bg-accent opacity-20 rounded-xl"></div>
 			<ExerciseList exercises={exercises} chosenExercise={chosenExercise} setChosenExercise={setChosenExercise} />

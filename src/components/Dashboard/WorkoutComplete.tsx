@@ -46,8 +46,8 @@ export default function WorkoutComplete({ workout, archive }: WorkoutCompletePro
 	}
 
 	return (
-		<div className="h-full w-full flex justify-center items-center relative">
-			<div className="rounded-lg p-14 gap-20 h-4/5 w-1/2 flex flex-col bg-snow-white shadow-2xl shadow-primary text-text justify-center items-center relative">
+		<div className="h-full w-full flex justify-center items-center relative overflow-y-scroll">
+			<div className="rounded-lg p-10 gap-10 h-fit w-1/2 flex flex-col bg-snow-white shadow-2xl shadow-primary text-text justify-center items-center relative">
 				{!archive ? (
 					<></>
 				) : (
