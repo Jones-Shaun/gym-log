@@ -1,5 +1,4 @@
-import { Navigate } from "react-router";
-import { NavLink, useNavigate } from "react-router";
+import {useNavigate } from "react-router";
 
 export default function CreateWorkout() {
 	let navigate = useNavigate();

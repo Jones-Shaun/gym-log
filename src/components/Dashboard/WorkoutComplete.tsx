@@ -9,7 +9,7 @@ interface WorkoutCompleteProps {
 	archive?: boolean;
 }
 
-export default function WorkoutComplete({ workout, archive }: WorkoutCompleteProps) {
+export default function WorkoutComplete({workout, archive }: WorkoutCompleteProps) {
 	let navigate = useNavigate();
 	async function handleSaveButton() {
 		if (workout) {
