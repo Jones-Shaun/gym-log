@@ -1,4 +1,12 @@
+import { Navigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+
 export default function CreateWorkout() {
+	let navigate = useNavigate();
+	async function handleCreateButton() {
+		navigate("/workout");
+	}
+
 	return (
 		<div className="h-full w-full flex flex-col text-primary/60 items-center justify-center text-4xl gap-12">
 			<form className="flex flex-col gap-4 w-3/4 p-10 overflow-y-scroll">
@@ -33,7 +41,9 @@ export default function CreateWorkout() {
 						</div>
 					</div>
 				</div>
-				<button type="submit" className="bg-primary text-white p-2 mt-4">Create</button>
+				<button type="submit" className="bg-primary text-white p-2 mt-4" onClick={handleCreateButton}>
+					Create
+				</button>
 			</form>
 		</div>
 	);
