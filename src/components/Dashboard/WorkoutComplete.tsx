@@ -15,12 +15,9 @@ export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
 			if (workoutHistory === undefined) {
 				workoutHistory = [];
 			}
-			workoutHistory?.push(workout);
-			console.log("saved:", workoutHistory);
-
+			workout.completionDate = dayjs().format("MMM DD YYYY");
+			workoutHistory.push(workout);
 			await db.setItem("WorkoutHistory", workoutHistory);
-			console.log(workoutHistory);
-			
 		}
 	}
 

@@ -1,6 +1,24 @@
 import { WorkoutInterface } from "../util/interfaces";
-import { useEffect } from "react";
+import db from "local-db-storage";
 
+let workoutHistory: WorkoutInterface[] | undefined = await db.getItem("WorkoutHistory");
 export default function History() {
-	return <div></div>;
+	return (
+		<div className="h-full w-full p-10 shadow-2xl bg-snow-white rounded-lg gap-10 flex flex-col">
+			<span className="text-3xl font-bold text-primary">Workout History</span>
+			<div className="h-full grid grid-rows-[repeat(auto-fill,_minmax(150px,1fr))] grid-cols-[repeat(auto-fill,_minmax(200px,1fr))] gap-8">
+				{workoutHistory?.map((workout) => {
+					return (
+						<div
+							key={workout.name}
+							className="bg-snow-white drop-shadow-lg rounded-lg flex flex-col justify-center items-center w-full h-full text-xl"
+						>
+							<span className="font-bold">{workout.completionDate}</span>
+							<span>{workout.name}</span>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	);
 }

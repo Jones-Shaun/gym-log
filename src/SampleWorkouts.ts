@@ -30,7 +30,8 @@ export const testWorkouts: WorkoutInterface[] = [
 			},
 		],
 		intensity: 8,
-		done: false
+		done: false,
+		timeElapsed: "45:32"
 	},
 	{
 		name: "Pull Day",
@@ -61,7 +62,8 @@ export const testWorkouts: WorkoutInterface[] = [
 			},
 		],
 		intensity: 7,
-		done: false
+		done: false,
+		timeElapsed: "38:15"
 	},
 	{
 		name: "Leg Day",
@@ -96,68 +98,39 @@ export const testWorkouts: WorkoutInterface[] = [
 			},
 		],
 		intensity: 9,
-		done: false
+		done: false,
+		timeElapsed: "50:21"
 	},
 	{
-		name: "Strength Endurance",
+		name: "Full Body Circuit",
 		exercises: [
 			{
-				name: "Kettlebell Swings",
-				reps: 20,
-				sets: 3,
-				musclesWorked: [Muscle.BACK, Muscle.HAMSTRINGS],
-				instructions: "Hinge at your hips, swing the kettlebell forward using your glutes, let it return naturally.",
-				setsCompleted: 0
-			},
-			{
-				name: "Goblet Squats",
-				reps: 12,
+				name: "Burpees",
+				reps: 15,
 				sets: 4,
-				musclesWorked: [Muscle.QUADRICEPS],
-				instructions: "Hold a kettlebell or dumbbell at chest level, squat down, and push back up.",
+				musclesWorked: [Muscle.CHEST],
+				instructions: "Start standing, drop into a squat, kick your feet back, do a push-up, then jump up explosively.",
 				setsCompleted: 0
 			},
 			{
-				name: "Battle Ropes",
-				reps: 30,
-				sets: 3,
-				musclesWorked: [Muscle.SHOULDERS, Muscle.ABDOMINALS],
-				instructions: "Hold ropes with both hands, create waves by moving arms up and down quickly.",
-				setsCompleted: 0
-			},
-		],
-		intensity: 8,
-		done: false
-	},
-	{
-		name: "Calisthenics Mastery",
-		exercises: [
-			{
-				name: "Muscle-Ups",
-				reps: 5,
-				sets: 4,
-				musclesWorked: [Muscle.BACK, Muscle.BICEPS, Muscle.TRICEPS],
-				instructions: "Explosively pull yourself up over the bar, transition into a dip, then push up.",
-				setsCompleted: 0
-			},
-			{
-				name: "Planche Push-Ups",
+				name: "Dumbbell Snatch",
 				reps: 8,
 				sets: 3,
-				musclesWorked: [Muscle.CHEST, Muscle.SHOULDERS],
-				instructions: "Lean forward into a planche position, lower yourself like a push-up, and press back up.",
+				musclesWorked: [Muscle.SHOULDERS, Muscle.BACK, Muscle.QUADRICEPS],
+				instructions: "Start with the dumbbell on the ground, explode up pulling it overhead in one motion.",
 				setsCompleted: 0
 			},
 			{
-				name: "Hanging Leg Raises",
-				reps: 15,
+				name: "Medicine Ball Slams",
+				reps: 20,
 				sets: 3,
-				musclesWorked: [Muscle.ABDOMINALS],
-				instructions: "Hang from a bar, lift your legs straight up, then lower slowly.",
+				musclesWorked: [Muscle.ABDOMINALS, Muscle.SHOULDERS],
+				instructions: "Lift the medicine ball overhead, slam it down to the ground with force, catch and repeat.",
 				setsCompleted: 0
 			},
 		],
-		intensity: 10,
-		done: false
-	},
+		intensity: 9,
+		done: false,
+		timeElapsed: "42:07"
+	}
 ];

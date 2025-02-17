@@ -1,14 +1,16 @@
 import { NavLink } from "react-router";
 import { WorkoutInterface } from "../util/interfaces";
-import { useState } from "react";
+import db from "local-db-storage";
+
+let workouts: WorkoutInterface[] | undefined = await db.getItem("WorkoutsDB");
 export default function Workout() {
-	const [workouts, setWorkouts] = useState<WorkoutInterface[]>([]);
-	return workouts.length > 0 ? (
+	// const [workouts, setWorkouts] = useState<WorkoutInterface[]>([]);
+
+	return workouts !== undefined ? (
 		<>
-			{workouts[0].name}
-			<button className="p-2 w-50 mt-auto bg-accent" onClick={() => setWorkouts([])}>
-				clear workouts
-			</button>
+			{workouts.map((workout) => {
+				return <div>{workout.name}</div>;
+			})}
 		</>
 	) : (
 		<div className="h-full w-full flex flex-col text-primary/60 items-center justify-center text-4xl gap-12">
