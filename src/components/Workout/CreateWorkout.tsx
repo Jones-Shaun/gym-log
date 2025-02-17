@@ -1,11 +1,10 @@
 import {Muscle, WorkoutInterface } from "../../util/interfaces";
-import {NavLink, useNavigate } from "react-router";
+import {NavLink} from "react-router";
 import db from "local-db-storage";
 
 export default function CreateWorkout() {
-	let navigate = useNavigate();
 	async function handleCreateButton(name: string) {
-		let workoutDB: WorkoutInterface[] | undefined = await db.getItem("WorkoutDB");
+		let workoutDB: WorkoutInterface[] | undefined = await db.getItem("WorkoutsDB");
 			if (workoutDB === undefined) {
 				workoutDB = [];
 			}

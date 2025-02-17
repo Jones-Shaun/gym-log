@@ -18,7 +18,6 @@ function App() {
 					<Route path="dashboard/*" element={<Dashboard />} />
 					<Route path="profile" element={<Profile />} />
 					<Route path="workout" element={<Workout />}></Route>
-					<Route path="workout/handwave" element={<Workout />}></Route>
 					<Route path="workout/create" element={<CreateWorkout />} />
 					<Route path="history" element={<History />} />
 					<Route path="history/:completionDate" element={<WorkoutHistoryInfo />} />

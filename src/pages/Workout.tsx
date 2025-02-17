@@ -7,7 +7,9 @@ export default function Workout() {
 	return workouts !== undefined ? (
 		<>
 			{workouts.map((workout) => {
-				return <div>{workout.name}</div>;
+				return <div className="w-full p-4 mb-4 bg-gray-200 rounded-lg shadow-md">
+					<h2 className="text-2xl font-semibold">{workout.name}</h2>
+				</div>;
 			})}
 			<div className="h-full w-full flex flex-col text-primary/60 items-center justify-center text-4xl gap-12">
 			<NavLink
