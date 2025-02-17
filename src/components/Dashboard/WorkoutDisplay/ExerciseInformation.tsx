@@ -44,14 +44,14 @@ export default function ExerciseInformation({ chosenExercise, exercises, setExer
 	};
 
 	return chosenExercise ? (
-		<div className="h-full w-full pl-5 flex flex-col gap-8" key={chosenExercise.name}>
+		<div className="h-full w-full pl-5 flex flex-col gap-8 select-none" key={chosenExercise.name}>
 			<div className="flex gap-2">
 				<span className="text-6xl text-primary font-bold">{chosenExercise.name}</span>
 				<span className="text-2xl font-black">
 					{chosenExercise.musclesWorked.reduce((str, muscle) => (str += muscle.toUpperCase() + " "), "")}
 				</span>
 			</div>
-			<div className="text-2xl flex flex-col">
+			<div className="text-2xl flex flex-col select-text">
 				<span className="font-black">INSTRUCTIONS</span>
 				{chosenExercise.instructions}
 			</div>
