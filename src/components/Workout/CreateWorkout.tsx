@@ -63,14 +63,14 @@ export default function CreateWorkout() {
 				</div>
 				<NavLink
 					className="bg-primary text-white p-2 mt-4 text-center"
-					onClick={() => {
+					onClick={async () => {
 						let nameInputElement = document.getElementById("nameInput");
 						if (nameInputElement === null) {
 							return;
 						}
 						let nameInput = (nameInputElement as HTMLInputElement).value;
 						if (nameInput !== null && nameInput !== "") {
-							handleCreateButton(nameInput.toString());
+							await handleCreateButton(nameInput.toString());
 						}
 					}}
 					to="/workout"

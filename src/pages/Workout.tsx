@@ -2,16 +2,15 @@ import { NavLink, useNavigate} from "react-router";
 import { WorkoutInterface } from "../util/interfaces";
 import db from "local-db-storage";
 import { useEffect, useState } from "react";
+import { fetchData } from "../util/util";
 
 export default function Workout() {
 	const [workouts, setWorkouts] = useState<WorkoutInterface[] | undefined>(undefined);
 
 	useEffect(() => {
-		async function fetchWorkouts() {
-			let workoutDB: WorkoutInterface[] | undefined = await db.getItem("WorkoutsDB");
-			setWorkouts(workoutDB);
-		}
-		fetchWorkouts();
+		fetchData<WorkoutInterface[]>("WorkoutsDB").then((res) => {			
+			setWorkouts(res);
+		});
 	}, []);
 
 	async function handleRemoveButton(name: string) {

@@ -1,9 +1,17 @@
 import { NavLink } from "react-router";
 import { WorkoutInterface } from "../util/interfaces";
-import db from "local-db-storage";
+import { useEffect, useState } from "react";
+import { fetchData } from "../util/util";
 
-let workoutHistory: WorkoutInterface[] | undefined = await db.getItem("WorkoutHistory");
 export default function History() {
+	const [workoutHistory, setWorkoutHistory] = useState<WorkoutInterface[]>();
+
+	useEffect(() => {
+		fetchData<WorkoutInterface[]>("WorkoutHistory").then((res) => {
+			setWorkoutHistory(res);
+		});
+	}, []);
+
 	return (
 		<div className="h-full w-full p-10 shadow-2xl bg-snow-white rounded-lg gap-10 flex flex-col">
 			<span className="text-3xl font-bold text-primary">Workout History</span>

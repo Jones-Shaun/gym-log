@@ -1,4 +1,5 @@
 import { WorkoutInterface } from "./interfaces";
+import db from "local-db-storage";
 
 export function aggregateMuscles(workout: WorkoutInterface) {
 	return [
@@ -8,4 +9,8 @@ export function aggregateMuscles(workout: WorkoutInterface) {
 			})
 		),
 	];
+}
+
+export async function fetchData<Type>(dbName: string) {
+	return await db.getItem<Type>(dbName);
 }

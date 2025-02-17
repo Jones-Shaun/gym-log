@@ -1,15 +1,12 @@
 import { WorkoutInterface } from "../../util/interfaces";
 import { useEffect, useState } from "react";
 import { testWorkouts } from "../../SampleWorkouts";
-import { aggregateMuscles } from "../../util/util";
+import { aggregateMuscles, fetchData } from "../../util/util";
 import { NavLink } from "react-router";
-import db from "local-db-storage";
-
 interface WorkoutGridProps {
 	setChosenWorkout: React.Dispatch<React.SetStateAction<WorkoutInterface | undefined>>;
 }
 
-let addedWorkouts: WorkoutInterface[] | undefined = await db.getItem("WorkoutsDB");
 export default function WorkoutGrid({ setChosenWorkout }: WorkoutGridProps) {
 	function handleWorkoutClick(workout: WorkoutInterface) {
 		setChosenWorkout(workout);
@@ -47,11 +44,15 @@ export default function WorkoutGrid({ setChosenWorkout }: WorkoutGridProps) {
 	};
 
 	const [workouts, setWorkouts] = useState<WorkoutInterface[]>([]);
-
 	useEffect(() => {
-		addedWorkouts && testWorkouts.push(...addedWorkouts)
-		setWorkouts(testWorkouts);
-	}, [addedWorkouts]);
+		if (workouts.length === 0) {
+			fetchData<WorkoutInterface[]>("WorkoutsDB").then((res) => {
+				if (res) {
+					setWorkouts(testWorkouts.concat(res));
+				}
+			});
+		}
+	}, []);
 
 	return (
 		<div className="h-full w-full bg-snow-white p-10 shadow-lg rounded-lg flex flex-col gap-10 text-text min-h-0">
