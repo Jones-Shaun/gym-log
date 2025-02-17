@@ -69,10 +69,9 @@ export default function CreateWorkout() {
 							return;
 						}
 						let nameInput = (nameInputElement as HTMLInputElement).value;
-						if (nameInput === null) {
-							nameInput = "";
+						if (nameInput !== null && nameInput !== "") {
+							handleCreateButton(nameInput.toString());
 						}
-						handleCreateButton(nameInput.toString());
 					}}
 					to="/workout"
 				>
