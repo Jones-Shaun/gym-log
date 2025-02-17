@@ -43,13 +43,6 @@ export default function Sidebar() {
 					<History size={25} />
 					History
 				</NavLink>
-				<NavLink
-					to={"database"}
-					className="flex items-center gap-3 rounded-md p-2 hover-css hover:bg-accent text-xl font-light"
-				>
-					<BookOpenText size={25} />
-					Database
-				</NavLink>
 			</div>
 		</div>
 	);

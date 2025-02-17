@@ -9,7 +9,7 @@ interface WorkoutCompleteProps {
 export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
 	return (
 		<div className="h-full w-full flex justify-center items-center">
-			<div className="rounded-lg p-14 gap-20 h-4/5 w-1/2 flex flex-col bg-snow-white shadow-2xl shadow-primary text-text">
+			<div className="rounded-lg p-14 gap-20 h-4/5 w-1/2 flex flex-col bg-snow-white shadow-2xl shadow-primary text-text justify-center items-center">
 				<span className="text-6xl font-bold w-full text-center">
 					{dayjs().format("dddd").toLowerCase()} <span className="text-primary underline">{workout?.name}</span> done
 				</span>
@@ -29,9 +29,7 @@ export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
 						15:67
 					</div>
 				</div>
-				<button 
-				
-				className="hover-css button-dark rounded-lg w-[20%] text-2xl">Save Workout</button>
+				<button className="hover-css button-light rounded-lg w-[25%] text-2xl">Save Workout</button>
 			</div>
 		</div>
 	);

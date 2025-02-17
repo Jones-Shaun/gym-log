@@ -7,7 +7,7 @@ export default function Workout() {
 		<>
 			{workouts[0].name}
 			<button
-				className="p-2 w-50 mt-auto bg-amber-600"
+				className="p-2 w-50 mt-auto bg-accent"
 				onClick={() => setWorkouts([])}
 			>
 				clear workouts
