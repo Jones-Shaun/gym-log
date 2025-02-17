@@ -14,10 +14,7 @@ function App() {
 			{/* Main Board */}
 			<div className="h-full w-full p-5 opacity-100 flex flex-col justify-center text-black">
 				<Routes>
-					<Route
-						path="/"
-						element={<Navigate replace to="dashboard" />}
-					/>
+					<Route path="/" element={<Navigate replace to="dashboard" />} />
 					<Route path="dashboard/*" element={<Dashboard />} />
 					<Route path="profile" element={<Profile />} />
 					<Route path="workout" element={<Workout />}></Route>

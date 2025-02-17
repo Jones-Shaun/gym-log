@@ -28,8 +28,6 @@ export default function SetCard({
 					: exercise
 			);
 		});
-		console.log(exercises);
-
 		setCompleted(!completed);
 	}
 
