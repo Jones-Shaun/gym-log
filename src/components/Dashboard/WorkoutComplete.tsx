@@ -1,35 +1,67 @@
 import { WorkoutInterface } from "../../util/interfaces";
 import dayjs from "dayjs";
-import { Trash } from "lucide-react";
+import { Trash, X } from "lucide-react";
 import db from "local-db-storage";
+import { NavLink, useNavigate } from "react-router";
 
 interface WorkoutCompleteProps {
 	workout: WorkoutInterface | undefined;
+	archive?: boolean;
 }
 
-export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
-	async function handleClick() {
+export default function WorkoutComplete({ workout, archive }: WorkoutCompleteProps) {
+	let navigate = useNavigate();
+	async function handleSaveButton() {
 		if (workout) {
 			let workoutHistory: WorkoutInterface[] | undefined = await db.getItem("WorkoutHistory");
 
 			if (workoutHistory === undefined) {
 				workoutHistory = [];
 			}
-			workout.completionDate = dayjs().format("MMM DD YYYY");
+			workout.completionDate = dayjs().format("MMM-DD-YYYY");
 			workoutHistory.push(workout);
 			await db.setItem("WorkoutHistory", workoutHistory);
+			navigate("/history");
+		}
+	}
+
+	async function handleDeleteButton() {
+		if (workout) {
+			let workoutHistory: WorkoutInterface[] | undefined = await db.getItem("WorkoutHistory");
+
+			if (workoutHistory === undefined) {
+				workoutHistory = [];
+			}
+			workoutHistory.splice(
+				workoutHistory.findIndex((w) => {
+					console.log(w, "and", workout);
+					
+					return w.name === workout.name && w.completionDate === workout.completionDate;
+				}),
+				1
+			);
+			await db.setItem("WorkoutHistory", workoutHistory);
+			navigate("/history");
 		}
 	}
 
 	return (
-		<div className="h-full w-full flex justify-center items-center">
-			<div className="rounded-lg p-14 gap-20 h-4/5 w-1/2 flex flex-col bg-snow-white shadow-2xl shadow-primary text-text justify-center items-center">
-				<span className="text-6xl font-bold w-full text-center">
-					{dayjs().format("dddd").toLowerCase()} <span className="text-primary underline">{workout?.name}</span> done
+		<div className="h-full w-full flex justify-center items-center relative">
+			<div className="rounded-lg p-14 gap-20 h-4/5 w-1/2 flex flex-col bg-snow-white shadow-2xl shadow-primary text-text justify-center items-center relative">
+				{!archive ? (
+					<></>
+				) : (
+					<NavLink className="absolute top-8 right-8" to={"/history"}>
+						<X size={30} className="hover-css hover:scale-110" />
+					</NavLink>
+				)}
+				<span className="text-5xl font-bold w-full text-center">
+					{!archive ? dayjs().format("dddd").toLowerCase() : workout?.completionDate} <span className="text-primary">{workout?.name}</span>
+					{!archive ? " done" : ""}
 				</span>
-				<div className="grid grid-cols-2 grid-rows-2 gap-8">
+				<div className="grid grid-cols-2 grid-rows-1 gap-8">
 					<div className="flex flex-col gap-1 shadow-xl p-8 rounded-3xl">
-						<span className="text-4xl font-bold text-primary">Exercises Done</span>
+						<span className="text-3xl font-bold text-primary">Exercises Done</span>
 						{workout?.exercises.map((exercise) => {
 							return (
 								<div className="text-2xl" key={exercise.name}>
@@ -38,19 +70,30 @@ export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
 							);
 						})}
 					</div>
-					<div className="flex flex-col justify-center items-center gap-1 shadow-xl p-8 rounded-3xl text-5xl font-bold">
+					<div className="flex flex-col justify-center items-center gap-1 shadow-xl p-8 rounded-3xl text-3xl font-bold">
 						<span className="text-primary">Time Elapsed</span>
 						15:67
 					</div>
 				</div>
-				<div className="flex gap-4 w-full items-center justify-center">
-					<button className="hover-css button-light rounded-lg w-[25%] text-2xl" onClick={handleClick}>
-						Save Workout
-					</button>
-					<button className="bg-red-400 hover-css p-3 rounded-lg text-2xl text-snow-white h-full hover:bg-red-700">
-						<Trash size={30} />
-					</button>
-				</div>
+				{!archive ? (
+					<div className="flex gap-4 w-full items-center justify-center">
+						<button className="hover-css button-light rounded-lg w-[25%] text-2xl" onClick={handleSaveButton}>
+							Save Workout
+						</button>
+						<button className="bg-red-400 hover-css p-3 rounded-lg text-2xl text-snow-white h-full hover:bg-red-700">
+							<Trash size={30} />
+						</button>
+					</div>
+				) : (
+					<></>
+				)}
+				{!archive ? (
+					<></>
+				) : (
+					<NavLink className="absolute bottom-8 right-8 text-red-500" to={"/history"}>
+						<Trash size={30} className="hover-css hover:scale-110" onClick={handleDeleteButton} />
+					</NavLink>
+				)}
 			</div>
 		</div>
 	);

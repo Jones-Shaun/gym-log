@@ -5,6 +5,7 @@ import Profile from "./Profile.js";
 import History from "./History.js";
 import CreateWorkout from "../components/Workout/CreateWorkout.js";
 import Dashboard from "./Dashboard.js";
+import WorkoutHistoryInfo from "../components/History/WorkoutHistoryInfo.js";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 					<Route path="workout" element={<Workout />}></Route>
 					<Route path="workout/create" element={<CreateWorkout />} />
 					<Route path="history" element={<History />} />
+					<Route path="history/:completionDate" element={<WorkoutHistoryInfo />} />
 				</Routes>
 			</div>
 		</div>
