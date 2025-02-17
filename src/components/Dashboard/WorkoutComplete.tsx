@@ -1,12 +1,29 @@
-import { SetStateAction } from "react";
-import { Exercise, WorkoutInterface } from "../../util/interfaces";
-import { render } from "react-dom";
+import { WorkoutInterface } from "../../util/interfaces";
 import dayjs from "dayjs";
+import { Trash } from "lucide-react";
+import db from "local-db-storage";
+
 interface WorkoutCompleteProps {
 	workout: WorkoutInterface | undefined;
 }
 
 export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
+	async function handleClick() {
+		if (workout) {
+			let workoutHistory: WorkoutInterface[] | undefined = await db.getItem("WorkoutHistory");
+
+			if (workoutHistory === undefined) {
+				workoutHistory = [];
+			}
+			workoutHistory?.push(workout);
+			console.log("saved:", workoutHistory);
+
+			await db.setItem("WorkoutHistory", workoutHistory);
+			console.log(workoutHistory);
+			
+		}
+	}
+
 	return (
 		<div className="h-full w-full flex justify-center items-center">
 			<div className="rounded-lg p-14 gap-20 h-4/5 w-1/2 flex flex-col bg-snow-white shadow-2xl shadow-primary text-text justify-center items-center">
@@ -18,7 +35,7 @@ export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
 						<span className="text-4xl font-bold text-primary">Exercises Done</span>
 						{workout?.exercises.map((exercise) => {
 							return (
-								<div className="text-2xl">
+								<div className="text-2xl" key={exercise.name}>
 									{exercise.name} : {exercise.sets}x{exercise.reps}
 								</div>
 							);
@@ -29,7 +46,14 @@ export default function WorkoutComplete({ workout }: WorkoutCompleteProps) {
 						15:67
 					</div>
 				</div>
-				<button className="hover-css button-light rounded-lg w-[25%] text-2xl">Save Workout</button>
+				<div className="flex gap-4 w-full items-center justify-center">
+					<button className="hover-css button-light rounded-lg w-[25%] text-2xl" onClick={handleClick}>
+						Save Workout
+					</button>
+					<button className="bg-red-400 hover-css p-3 rounded-lg text-2xl text-snow-white h-full hover:bg-red-700">
+						<Trash size={30} />
+					</button>
+				</div>
 			</div>
 		</div>
 	);

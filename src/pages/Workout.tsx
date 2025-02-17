@@ -1,15 +1,12 @@
 import { NavLink } from "react-router";
-import useLocalStorage from "use-local-storage";
-import {WorkoutInterface} from "../util/interfaces"
+import { WorkoutInterface } from "../util/interfaces";
+import { useState } from "react";
 export default function Workout() {
-	const [workouts, setWorkouts] = useLocalStorage<WorkoutInterface[]>("workouts", []);
+	const [workouts, setWorkouts] = useState<WorkoutInterface[]>([]);
 	return workouts.length > 0 ? (
 		<>
 			{workouts[0].name}
-			<button
-				className="p-2 w-50 mt-auto bg-accent"
-				onClick={() => setWorkouts([])}
-			>
+			<button className="p-2 w-50 mt-auto bg-accent" onClick={() => setWorkouts([])}>
 				clear workouts
 			</button>
 		</>

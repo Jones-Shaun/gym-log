@@ -1,6 +1,5 @@
-import useLocalStorage from "use-local-storage";
 import { WorkoutInterface } from "../../util/interfaces";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { testWorkouts } from "../../SampleWorkouts";
 import { aggregateMuscles } from "../../util/util";
 import { NavLink } from "react-router";
@@ -45,7 +44,7 @@ export default function WorkoutGrid({ setChosenWorkout }: WorkoutGridProps) {
 		});
 	};
 
-	const [workouts, setWorkouts] = useLocalStorage<WorkoutInterface[]>("workouts", []);
+	const [workouts, setWorkouts] = useState<WorkoutInterface[]>([]);
 
 	useEffect(() => {
 		setWorkouts(testWorkouts);
