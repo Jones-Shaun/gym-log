@@ -1,7 +1,7 @@
 import { BookMarked, Dumbbell, House } from "lucide-react";
 import { UserRound } from "lucide-react";
 import { History } from "lucide-react";
-import { BookOpenText } from "lucide-react";
+// import { BookOpenText } from "lucide-react";
 import { NavLink } from "react-router";
 
 export default function Sidebar() {

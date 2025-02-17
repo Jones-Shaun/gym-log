@@ -1,4 +1,4 @@
-import { NavLink, useNavigate} from "react-router";
+import { NavLink} from "react-router";
 import { WorkoutInterface } from "../util/interfaces";
 import db from "local-db-storage";
 import { useEffect, useState } from "react";
