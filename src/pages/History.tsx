@@ -17,8 +17,6 @@ export default function History() {
 			<span className="text-3xl font-bold text-primary">Workout History</span>
 			<div className="h-full grid grid-rows-[repeat(auto-fill,_minmax(150px,1fr))] grid-cols-[repeat(auto-fill,_minmax(200px,1fr))] gap-8">
 				{workoutHistory?.map((workout) => {
-					console.log(workout.completionDate?.toLowerCase());
-
 					return (
 						<NavLink
 							key={workout.name}

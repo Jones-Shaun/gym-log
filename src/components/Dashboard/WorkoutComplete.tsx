@@ -33,9 +33,7 @@ export default function WorkoutComplete({workout, archive }: WorkoutCompleteProp
 				workoutHistory = [];
 			}
 			workoutHistory.splice(
-				workoutHistory.findIndex((w) => {
-					console.log(w, "and", workout);
-					
+				workoutHistory.findIndex((w) => {					
 					return w.name === workout.name && w.completionDate === workout.completionDate;
 				}),
 				1
