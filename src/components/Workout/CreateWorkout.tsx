@@ -1,30 +1,35 @@
-import {Muscle, WorkoutInterface } from "../../util/interfaces";
-import {NavLink} from "react-router";
+import { Muscle, WorkoutInterface } from "../../util/interfaces";
+import { useNavigate } from "react-router";
 import db from "local-db-storage";
 
 export default function CreateWorkout() {
+	const navigate = useNavigate();
 	async function handleCreateButton(name: string) {
 		let workoutDB: WorkoutInterface[] | undefined = await db.getItem("WorkoutsDB");
-			if (workoutDB === undefined) {
-				workoutDB = [];
-			}
-			let workout: WorkoutInterface = {
-				name: name,
-				exercises: [
-							{
-								name: "Inclined Bench Press",
-								reps: 10,
-								sets: 4,
-								musclesWorked: [Muscle.CHEST, Muscle.TRICEPS],
-								instructions: "Lie on a bench set to 45 degrees, grip two Dumbell slightly wider than shoulder-width at an angle facing your pecs, lower it to your chest, then push it back up.",
-								setsCompleted: 0
-							}],
-				intensity: 0,
-				timeElapsed: "0",
-				done: false
-			};
+		if (workoutDB === undefined) {
+			workoutDB = [];
+		}
+		let workout: WorkoutInterface = {
+			name: name,
+			exercises: [
+				{
+					name: "Inclined Bench Press",
+					reps: 10,
+					sets: 4,
+					musclesWorked: [Muscle.CHEST, Muscle.TRICEPS],
+					instructions:
+						"Lie on a bench set to 45 degrees, grip two Dumbell slightly wider than shoulder-width at an angle facing your pecs, lower it to your chest, then push it back up.",
+					setsCompleted: 0,
+				},
+			],
+			intensity: 0,
+			timeElapsed: "0",
+			done: false,
+		};
 		workoutDB.push(workout);
-		await db.setItem("WorkoutsDB", workoutDB);
+		await db.setItem("WorkoutsDB", workoutDB).then(() => {
+			navigate("/workout");
+		});
 	}
 
 	return (
@@ -38,7 +43,9 @@ export default function CreateWorkout() {
 				<div className="flex flex-col gap-4">
 					<div className="flex justify-between items-center">
 						<h2 className="text-2xl">Exercises</h2>
-						<button type="button" className="bg-primary text-white p-2 text-xl">Add</button>
+						<button type="button" className="bg-primary text-white p-2 text-xl">
+							Add
+						</button>
 					</div>
 					<div className="flex flex-col gap-4">
 						<div className="flex flex-col gap-2 border p-4">
@@ -61,9 +68,10 @@ export default function CreateWorkout() {
 						</div>
 					</div>
 				</div>
-				<NavLink
+				<button
 					className="bg-primary text-white p-2 mt-4 text-center"
-					onClick={async () => {
+					onClick={async (e) => {
+						e.preventDefault();
 						let nameInputElement = document.getElementById("nameInput");
 						if (nameInputElement === null) {
 							return;
@@ -73,10 +81,9 @@ export default function CreateWorkout() {
 							await handleCreateButton(nameInput.toString());
 						}
 					}}
-					to="/workout"
 				>
 					Create
-				</NavLink>
+				</button>
 			</form>
 		</div>
 	);
