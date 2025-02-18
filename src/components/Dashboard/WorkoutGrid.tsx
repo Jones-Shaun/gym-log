@@ -46,11 +46,16 @@ export default function WorkoutGrid({ setChosenWorkout }: WorkoutGridProps) {
 	const [workouts, setWorkouts] = useState<WorkoutInterface[]>([]);
 	useEffect(() => {
 		if (workouts.length === 0) {
-			fetchData<WorkoutInterface[]>("WorkoutsDB").then((res) => {
-				if (res) {
-					setWorkouts(testWorkouts.concat(res));
-				}
-			});
+			setWorkouts(testWorkouts);
+			fetchData<WorkoutInterface[]>("WorkoutsDB")
+				.then((res) => {
+					if (res) {
+						setWorkouts(testWorkouts.concat(res));
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 	}, []);
 
